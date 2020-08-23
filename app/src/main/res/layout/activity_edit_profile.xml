@@ -8,97 +8,81 @@
     tools:context=".EditProfile">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="Edit Profile"
         android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center_horizontal" />
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etSearch"
+        android:id="@+id/etUserNameEP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Search"
+        android:hint="User Name"
         android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/btnSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Search"
         android:text="Search" />
 
     <EditText
-        android:id="@+id/etDOB"
+        android:id="@+id/etDobEP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/dateOfBirth"
+        android:hint="dateOfBirth"
         android:inputType="date" />
 
     <EditText
-        android:id="@+id/etName"
+        android:id="@+id/etPasswordEP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Name"
+        android:hint="password"
         android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/etPasswordEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/radioGroup2"
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/radioMaleEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="27dp"
-            android:layout_marginBottom="4dp"
-            android:text="Male"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.281"
-            app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gender"
+            android:textSize="18sp" />
 
         <RadioButton
-            android:id="@+id/radioFemaleEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="31dp"
-            android:layout_marginBottom="4dp"
-            android:text="Female"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.648"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Male"
+            android:text="@string/male" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Female"
+            android:text="@string/female" />
+    </RadioGroup>
 
     <Button
-        android:id="@+id/btnEdit"
+        android:id="@+id/btnEditEP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Edit"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Edit" />
 
     <Button
-        android:id="@+id/btnDelete"
+        android:id="@+id/btnDeleteEP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delete" />
-
 </LinearLayout>

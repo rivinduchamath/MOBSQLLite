@@ -14,8 +14,8 @@ import lk.sliit.mad.sqllite.database.DBHandler;
 
 public class ProfileManagement extends AppCompatActivity {
 
-    Button btnAdd, btnUpdateProfile;
-    EditText rtDob, etUserName, etPassword;
+    EditText username, dob, password ;
+    Button add, updateProfile;
     RadioButton male, female;
     String gender;
 
@@ -24,37 +24,48 @@ public class ProfileManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_management);
 
-        rtDob = findViewById(R.id.etUserName);
-        etUserName = findViewById(R.id.etBirth);
-        etPassword = findViewById(R.id.etPassword);
-        btnAdd = findViewById(R.id.buttonAdd);
-        btnUpdateProfile = findViewById(R.id.btnUpdateProfile);
-        female = findViewById(R.id.radioFemale);
-        male = findViewById(R.id.radioMale);
+        username = findViewById(R.id.etUserNamePM);
+        dob = findViewById(R.id.etDobPM);
+        password = findViewById(R.id.etPasswordPM);
+        add = findViewById(R.id.btnAdd);
+        updateProfile = findViewById(R.id.btnUpdateProfile);
+        male = findViewById(R.id.radioButton);
+        female = findViewById(R.id.radioButton2);
 
-        btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
+        updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), EditProfile.class);
+                Intent i = new Intent(getApplicationContext(),EditProfile.class);
                 startActivity(i);
             }
         });
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (male.isChecked()) {
-                    gender = "male";
-                } else {
-                    gender = "female";
+
+                if (male.isChecked()){
+                    gender = "Male";
                 }
-                DBHandler dbHelper = new DBHandler(getApplicationContext());
-              long  newId =   dbHelper.addInfo(etUserName.getText().toString(), rtDob.getText().toString(),
-                        etPassword.getText().toString(), gender);
-                Toast.makeText(ProfileManagement.this, "User"+newId+"  Added User Id ", Toast.LENGTH_SHORT).show();
+                else {
+                    gender = "Female";
+                }
 
-                Intent i = new Intent(getApplicationContext(), EditProfile.class);
+                DBHandler dbHandler = new DBHandler(getApplicationContext());
+                long newID = dbHandler.addInfo(username.getText().toString(),dob.getText().toString(),password.getText().toString(),gender);
+                Toast.makeText(ProfileManagement.this, "User Added. User ID: "+ newID, Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(getApplicationContext(),EditProfile.class);
                 startActivity(i);
+                username.setText(null);
+                dob.setText(null);
+                password.setText(null);
+                male.setChecked(true);
+                female.setChecked(false);
+
+
             }
         });
+
     }
 }

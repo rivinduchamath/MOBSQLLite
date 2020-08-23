@@ -10,24 +10,28 @@ import android.widget.EditText;
 
 public class Home extends AppCompatActivity {
 
-    EditText userName,password;
-    Button btnLogin,btnRegister;
+    EditText username, password;
+    Button login, register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
-        userName = findViewById(R.id.etHomeUserName);
-        password = findViewById(R.id.eTPassword);
+        username = findViewById(R.id.etUserNameH);
+        password = findViewById(R.id.etPasswordH);
+        login = findViewById(R.id.btnLoginH);
+        register = findViewById(R.id.btnRegisterH);
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent i = new Intent(getApplicationContext(),ProfileManagement.class);
                 startActivity(i);
+
             }
         });
+
     }
 }

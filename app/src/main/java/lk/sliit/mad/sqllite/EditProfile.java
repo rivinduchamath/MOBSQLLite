@@ -14,9 +14,8 @@ import java.util.List;
 import lk.sliit.mad.sqllite.database.DBHandler;
 
 public class EditProfile extends AppCompatActivity {
-
-    Button btnEdit, btnDelete, btnSearch;
-    EditText rtDob, etUserName, etPassword, etSearch;
+    EditText username, dob, password ;
+    Button edit, delete, search;
     RadioButton male, female;
     String gender;
 
@@ -25,32 +24,84 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        btnEdit = findViewById(R.id.btnEdit);
-        btnDelete = findViewById(R.id.btnDelete);
-        btnSearch = findViewById(R.id.btnSearch);
-        etSearch = findViewById(R.id.etSearch);
+        username = findViewById(R.id.etUserNameEP);
+        dob = findViewById(R.id.etDobEP);
+        password = findViewById(R.id.etPasswordEP);
+        edit = findViewById(R.id.btnEditEP);
+        delete = findViewById(R.id.btnDeleteEP);
+        search = findViewById(R.id.btnSearch);
+        male = findViewById(R.id.radioButton3);
+        female = findViewById(R.id.radioButton4);
 
-        rtDob = findViewById(R.id.etDOB);
-        etUserName = findViewById(R.id.etName);
-        etPassword = findViewById(R.id.etPasswordEdit);
-
-        female = findViewById(R.id.radioMaleEdit);
-        male = findViewById(R.id.radioFemaleEdit);
-
-        btnSearch.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                DBHandler dbHelper = new DBHandler(getApplicationContext());
-                List user = dbHelper.getInfo(etUserName.getText().toString());
+                DBHandler dbHandler = new DBHandler(getApplicationContext());
+                List user = dbHandler.readAllInfo(username.getText().toString());
 
-                if (user == null) {
-                    Toast.makeText(EditProfile.this, "No Such User", Toast.LENGTH_SHORT).show();
-                    etUserName.setText(null);
-                }else {
+                if (user.isEmpty()){
+                    Toast.makeText(EditProfile.this, "No User", Toast.LENGTH_SHORT).show();
+                    username.setText(null);
+                }
+                else {
+
+                    Toast.makeText(EditProfile.this, "User Found! User: "+user.get(0).toString(), Toast.LENGTH_SHORT).show();
+                    username.setText(user.get(0).toString());
+                    dob.setText(user.get(1).toString());
+                    password.setText(user.get(2).toString());
+                    if (user.get(3).toString().equals("Male")){
+                        male.setChecked(true);
+                    }
+                    else {
+                        female.setChecked(true);
+                    }
+
 
                 }
+
             }
         });
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (male.isChecked()){
+                    gender = "Male";
+                }
+                else {
+                    gender = "Female";
+                }
+                DBHandler dbHandler = new DBHandler(getApplicationContext());
+
+                Boolean status = dbHandler.updateInfo(username.getText().toString(),dob.getText().toString(),password.getText().toString(),gender);
+                if (status){
+                    Toast.makeText(EditProfile.this, "User Updated", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(EditProfile.this, "Update Failed", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DBHandler dbHandler = new DBHandler(getApplicationContext());
+                dbHandler.deleteInfo(username.getText().toString());
+
+                Toast.makeText(EditProfile.this, "User Deleted", Toast.LENGTH_SHORT).show();
+
+                username.setText(null);
+                dob.setText(null);
+                password.setText(null);
+                male.setChecked(false);
+                female.setChecked(false);
+            }
+        });
+
     }
 }

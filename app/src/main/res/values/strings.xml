@@ -6,4 +6,17 @@
     <string name="update_profile">Update Profile</string>
     <string name="add">Add</string>
     <string name="dateOfBirth">Date Of Birth</string>
+    <string name="female" />
+    <string name="edit" />
+    <string name="delete" />
+    <string name="male" />
+    <string name="gender" />
+    <string name="editprofile" />
+    <string name="username" />
+    <string name="search" />
+    <string name="dateofbirth" />
+    <string name="password" />
+    <string name="login" />
+    <string name="register" />
+    <string name="profile_management" />
 </resources>
