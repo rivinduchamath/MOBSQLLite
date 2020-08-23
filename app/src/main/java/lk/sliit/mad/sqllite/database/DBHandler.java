@@ -2,8 +2,13 @@ package lk.sliit.mad.sqllite.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
@@ -93,5 +98,45 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+public List getInfo(){
+        String userName ="Gimmy";
+    SQLiteDatabase db = getReadableDatabase();
 
+    // Define a projection that specifies which columns from the database
+    // you will actually use after this query.
+    String[] projection = {
+            BaseColumns._ID,
+            UserProfile.Users.COLUMN_1,
+            UserProfile.Users.COLUMN_2,
+            UserProfile.Users.COLUMN_3,
+            UserProfile.Users.COLUMN_4
+    };
+
+// Filter results WHERE "title" = 'My Title'
+    String selection = UserProfile.Users.COLUMN_1 + " = ?";
+    String[] selectionArgs = { userName };
+
+// How you want the results sorted in the resulting Cursor
+    String sortOrder =
+            UserProfile.Users.COLUMN_1 + " ASE";
+
+    Cursor cursor = db.query(
+            UserProfile.Users.TABLE_NAME,   // The table to query
+            projection,             // The array of columns to return (pass null to get all)
+           null,
+            null,     // The values for the WHERE clause
+            null,                   // don't group the rows
+            null,                   // don't filter by row groups
+            sortOrder               // The sort order
+    );
+    List userNames = new ArrayList<>();
+    while(cursor.moveToNext()) {
+        String user = cursor.getString(
+                cursor.getColumnIndexOrThrow(UserProfile.Users.COLUMN_1));
+        userNames.add(user);
+    }
+    cursor.close();
+return userNames;
+
+}
 }
