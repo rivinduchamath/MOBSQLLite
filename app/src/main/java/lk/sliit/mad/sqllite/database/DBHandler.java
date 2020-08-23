@@ -45,14 +45,14 @@ public class DBHandler extends SQLiteOpenHelper {
         // Gets the data repository in write mode
         SQLiteDatabase db = getWritableDatabase();
 
-// Create a new map of values, where column names are the keys
+        // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(UserProfile.Users.COLUMN_1, name);
         values.put(UserProfile.Users.COLUMN_2, dob);
         values.put(UserProfile.Users.COLUMN_3, password);
         values.put(UserProfile.Users.COLUMN_4, gender);
 
-// Insert the new row, returning the primary key value of the new row
+        // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(UserProfile.Users.TABLE_NAME, null, values);
         return newRowId;
     }
@@ -60,14 +60,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public Boolean updateInfo(String name, String dob, String password, String gender) {
         SQLiteDatabase db = getWritableDatabase();
 
-// New value for one column
+        // New value for one column
 
         ContentValues values = new ContentValues();
         values.put(UserProfile.Users.COLUMN_2, dob);
         values.put(UserProfile.Users.COLUMN_3, password);
         values.put(UserProfile.Users.COLUMN_4, gender);
 
-// Which row to update, based on the title
+        // Which row to update, based on the title
         String selection = UserProfile.Users.COLUMN_1 + " LIKE ?";
         String[] selectionArgs = { name };
 
@@ -76,11 +76,22 @@ public class DBHandler extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-        if(count >= 1){
-            return true;
-        }else {
-            return false;
-        }
+        return count >= 1;
+    }
+
+    public void deleteInfo(String userName) {
+
+        // Gets the data repository in write mode
+        SQLiteDatabase db = getWritableDatabase();
+
+        // Define 'where' part of query.
+        String selection = UserProfile.Users.COLUMN_1 + " LIKE ?";
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = {"MyTitle"};
+        // Issue SQL statement.
+        int deletedRows = db.delete(UserProfile.Users.TABLE_NAME, selection, selectionArgs);
 
     }
+
+
 }
