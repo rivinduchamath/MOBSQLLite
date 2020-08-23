@@ -112,11 +112,11 @@ public List getInfo(){
             UserProfile.Users.COLUMN_4
     };
 
-// Filter results WHERE "title" = 'My Title'
+    // Filter results WHERE "title" = 'My Title'
     String selection = UserProfile.Users.COLUMN_1 + " = ?";
     String[] selectionArgs = { userName };
 
-// How you want the results sorted in the resulting Cursor
+    // How you want the results sorted in the resulting Cursor
     String sortOrder =
             UserProfile.Users.COLUMN_1 + " ASE";
 
@@ -139,4 +139,53 @@ public List getInfo(){
 return userNames;
 
 }
+////////////////////////////////////////////////////
+
+
+    public List getInfo(String userName){
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                BaseColumns._ID,
+                UserProfile.Users.COLUMN_1,
+                UserProfile.Users.COLUMN_2,
+                UserProfile.Users.COLUMN_3,
+                UserProfile.Users.COLUMN_4
+        };
+
+        // Filter results WHERE "title" = 'My Title'
+        String selection = UserProfile.Users.COLUMN_1 + " = ?";
+        String[] selectionArgs = { userName };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                UserProfile.Users.COLUMN_1 + " ASE";
+
+        Cursor cursor = db.query(
+                UserProfile.Users.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                selection,
+                selectionArgs,     // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                sortOrder               // The sort order
+        );
+        List userInfo = new ArrayList<>();
+        while(cursor.moveToNext()) {
+            String user = cursor.getString(cursor.getColumnIndexOrThrow(UserProfile.Users.COLUMN_1));
+            String dob = cursor.getString(cursor.getColumnIndexOrThrow(UserProfile.Users.COLUMN_2));
+            String password = cursor.getString(cursor.getColumnIndexOrThrow(UserProfile.Users.COLUMN_3));
+            String gender = cursor.getString(cursor.getColumnIndexOrThrow(UserProfile.Users.COLUMN_4));
+            userInfo.add(user);
+            userInfo.add(dob);
+            userInfo.add(password);
+            userInfo.add(gender);
+        }
+        cursor.close();
+        return userInfo;
+
+    }
 }

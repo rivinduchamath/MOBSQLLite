@@ -49,13 +49,23 @@
         android:hint="Name"
         android:inputType="textPersonName" />
 
+    <EditText
+        android:id="@+id/etPasswordEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/radioGroup2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/radioMale"
+            android:id="@+id/radioMaleEdit"
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginBottom="4dp"
@@ -66,7 +76,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <RadioButton
-            android:id="@+id/radioFemale"
+            android:id="@+id/radioFemaleEdit"
             android:layout_width="wrap_content"
             android:layout_height="31dp"
             android:layout_marginBottom="4dp"
