@@ -23,6 +23,13 @@ public class Home extends AppCompatActivity {
         login = findViewById(R.id.btnLoginH);
         register = findViewById(R.id.btnRegisterH);
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                login.setText("AB");
+            }
+        });
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
