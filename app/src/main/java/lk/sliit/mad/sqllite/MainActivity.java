@@ -3,6 +3,7 @@ package lk.sliit.mad.sqllite;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -31,9 +32,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendVal(String val) {
-        Intent intent = new Intent(getApplicationContext(),MainActivity2.class);
-        intent.putExtra("Value1", val);
-        startActivity(intent);
+
+//        Explicit Intent
+
+//        Intent intent = new Intent(getApplicationContext(),MainActivity2.class);
+//        intent.putExtra("Value1", val);
+//        startActivity(intent);
+
+//        Implicit Intent
+
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(""));
+
 
     }
 }
